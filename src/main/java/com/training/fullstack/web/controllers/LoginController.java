@@ -8,7 +8,7 @@ public class LoginController {
 
     static final String LOGIN_VIEW_NAME = "user/login";
 
-    @GetMapping
+    @GetMapping("/login")
     public String login (){
         return LOGIN_VIEW_NAME;
     }
