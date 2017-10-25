@@ -7,6 +7,24 @@
     <div th:replace="common/navbar :: common-navbar"></div>
 
     <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <div th:if="${param.error}" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <p th:text="#{login.error.message}"/>
+                </div>
+
+                <div th:if="${param.logout}" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <p th:text="#{login.logout.message}"/>
+                </div>
+            </div>
+        </div>
+
         <div class="well">
             <div class="text-center">
                 <h1 th:text="#{login.h1.text}" ></h1>
@@ -26,13 +44,12 @@
 
                     <div class="form-group">
                         <label for="password" th:text="#{login.password.text}"></label>
-                        <input type="password" id="password" name="username" class="form-control"/>
+                        <input type="password" id="password" name="password" class="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <button type="submit" th:text="#{navbar.login.title}" class="btn btn-primary"/>
                     </div>
-
                 </form>
 
             </div>
