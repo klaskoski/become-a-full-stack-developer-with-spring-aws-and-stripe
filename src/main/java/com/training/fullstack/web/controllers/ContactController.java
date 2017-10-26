@@ -1,9 +1,11 @@
 package com.training.fullstack.web.controllers;
 
+import com.training.fullstack.backend.service.EmailService;
 import com.training.fullstack.web.domain.Feedback;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,9 @@ public class ContactController {
     private static final String CONTACT_PAGE = "contact/contact";
     private static final String FEEDBACK = "feedback";
 
+    @Autowired
+    private EmailService emailService;
+
     @GetMapping("/contact")
     public String contactGet(ModelMap model){
         Feedback feedback = new Feedback();
@@ -27,6 +32,7 @@ public class ContactController {
     @PostMapping("/contact")
     public String contactPut(@ModelAttribute Feedback feedback){
         LOG.debug("Feedback content {}",feedback);
+        emailService.sendFeedbackEmail(feedback);
         return CONTACT_PAGE;
     }
 }
