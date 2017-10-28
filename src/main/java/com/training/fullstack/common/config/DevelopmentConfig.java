@@ -18,11 +18,4 @@ public class DevelopmentConfig {
     EmailService emailService(){
         return new MockEmailService();
     }
-
-    @Bean
-    public ServletRegistrationBean h2ConsoleRegistration(){
-        ServletRegistrationBean bean = new ServletRegistrationBean(new WebServlet());
-        bean.addUrlMappings("/console/*");
-        return bean;
-    }
 }
