@@ -23,7 +23,7 @@ public class UserServiceIntegrationTest {
     @Test
     public void createNewUser() throws Exception {
 
-        User user = UserUtils.createBasicUser();
+        User user = UserUtils.createBasicUser("TestUSer2", "testUser2@gmail.com");
         Set<UserRole> userRoles = new HashSet<>();
         userRoles.add(new UserRole(user, new Role(RoleEnum.ADMIN)));
 
