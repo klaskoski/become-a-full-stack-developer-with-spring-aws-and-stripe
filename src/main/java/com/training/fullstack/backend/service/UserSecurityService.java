@@ -1,5 +1,6 @@
 package com.training.fullstack.backend.service;
 
+import com.training.fullstack.backend.domain.backend.User;
 import com.training.fullstack.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,10 @@ public class UserSecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        User user =  userRepository.findByUsername(username);
+        if (user == null){
+            throw new UsernameNotFoundException("Username " + username + "not found");
+        }
+        return user;
     }
 }
