@@ -19,6 +19,11 @@ public class Role implements Serializable {
     public Role() {
     }
 
+    public Role(RoleEnum roleEnum) {
+        setName(roleEnum.getRoleName());
+        setId(roleEnum.getId());
+    }
+
     public Set<UserRole> getUserRoles() {
         return userRoles;
     }

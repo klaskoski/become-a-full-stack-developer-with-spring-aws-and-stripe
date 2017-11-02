@@ -9,17 +9,23 @@ public class Plan implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private long id;
+    private int id;
+
     private String name;
 
     public Plan(){
     }
 
-    public long getId() {
+    public Plan(PlanEnum planEnum) {
+        setId(planEnum.getId());
+        setName(planEnum.getPlanName());
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -43,6 +49,6 @@ public class Plan implements Serializable {
 
     @Override
     public int hashCode() {
-        return (int) (id ^ (id >>> 32));
+        return (id ^ (id >>> 32));
     }
 }
