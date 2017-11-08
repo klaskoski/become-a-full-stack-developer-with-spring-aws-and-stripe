@@ -50,4 +50,10 @@ public class UserService {
         user = userRepository.save(user);
         return user;
     }
+
+    @Transactional
+    public void updateUserPassword(long userId, String password) {
+        password = passwordEncoder.encode(password);
+        userRepository.updateUserPassword(userId, password);
+    }
 }

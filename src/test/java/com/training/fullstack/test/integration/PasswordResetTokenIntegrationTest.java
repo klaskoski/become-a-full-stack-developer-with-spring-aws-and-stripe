@@ -28,7 +28,7 @@ public class PasswordResetTokenIntegrationTest extends AbstractIntegrationTest {
 
     @Test
     public void tokenShouldExpire() throws Exception {
-        User user = createUser(testName.getMethodName(), testName.getMethodName() + "@testname.com");
+        User user = createUser(testName.getMethodName());
         Assert.assertNotNull(user);
 
         LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
@@ -45,7 +45,7 @@ public class PasswordResetTokenIntegrationTest extends AbstractIntegrationTest {
 
     @Test
     public void findTokenByValue() throws Exception {
-        User user = createUser(testName.getMethodName(), testName.getMethodName() + "@testname.com");
+        User user = createUser(testName.getMethodName());
         String token = UUID.randomUUID().toString();
         LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
 

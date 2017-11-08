@@ -3,19 +3,22 @@ package com.training.fullstack.test.integration;
 import com.training.fullstack.backend.domain.backend.*;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Set;
+import java.util.UUID;
 
-/**
- * Created by tedonema on 29/03/2016.
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserRepositoryIntegrationTest extends AbstractIntegrationTest {
+
+    @Rule
+    public TestName testName = new TestName();
 
     @Before
     public void init() {
@@ -44,7 +47,7 @@ public class UserRepositoryIntegrationTest extends AbstractIntegrationTest {
     @Test
     public void createNewUser() throws Exception {
 
-        User user = createUser("usertoCreate", "userToCreate@gmail.com");
+        User user = createUser(testName.getMethodName());
         User newlyCreatedUser = userRepository.findOne(user.getId());
         Assert.assertNotNull(newlyCreatedUser);
         Assert.assertTrue(newlyCreatedUser.getId() != 0);
@@ -58,8 +61,27 @@ public class UserRepositoryIntegrationTest extends AbstractIntegrationTest {
 
     @Test
     public void deleteUser() throws Exception {
-        User basicUser = createUser("userToDelete", "userToDelete@gmail.com");
+        User basicUser = createUser(testName.getMethodName());
         userRepository.delete(basicUser.getId());
     }
 
+    @Test
+    public void getUserByEmail() throws Exception {
+        User user = createUser(testName.getMethodName());
+
+        User createdUser = userRepository.findByEmail(user.getEmail());
+        Assert.assertNotNull(createdUser);
+        Assert.assertEquals(user, createdUser);
+    }
+
+    @Test
+    public void updateUserPassword() throws Exception {
+        User user = createUser(testName.getMethodName());
+
+        String newPassword = UUID.randomUUID().toString();
+
+        userRepository.updateUserPassword(user.getId(), newPassword);
+        user = userRepository.findOne(user.getId());
+        Assert.assertEquals(newPassword, user.getPassword());
+    }
 }

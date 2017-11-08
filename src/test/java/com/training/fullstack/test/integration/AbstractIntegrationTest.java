@@ -26,11 +26,11 @@ public class AbstractIntegrationTest {
     @Rule
     public TestName testName = new TestName();
 
-    protected User createUser(String username, String email) {
+    protected User createUser(String username) {
         Plan plan =  new Plan(PlanEnum.BASIC);
         planRepository.save(plan);
 
-        User user = UserUtils.createBasicUser(username, email);
+        User user = UserUtils.createBasicUser(username, username + "@test.com");
         user.setPlan(plan);
 
         Role adminRole = new Role(RoleEnum.BASIC);
