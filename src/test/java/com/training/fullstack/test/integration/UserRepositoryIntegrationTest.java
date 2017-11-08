@@ -1,43 +1,21 @@
 package com.training.fullstack.test.integration;
 
 import com.training.fullstack.backend.domain.backend.*;
-import com.training.fullstack.backend.repositories.PlanRepository;
-import com.training.fullstack.backend.repositories.RoleRepository;
-import com.training.fullstack.backend.repositories.UserRepository;
-import com.training.fullstack.common.util.UserUtils;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * Created by tedonema on 29/03/2016.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserRepositoryIntegrationTest {
-
-    @Autowired
-    protected PlanRepository planRepository;
-
-    @Autowired
-    protected RoleRepository roleRepository;
-
-    @Autowired
-    protected UserRepository userRepository;
-
-
-    @Rule public TestName testName = new TestName();
-
+public class UserRepositoryIntegrationTest extends AbstractIntegrationTest {
 
     @Before
     public void init() {
@@ -71,11 +49,9 @@ public class UserRepositoryIntegrationTest {
         Assert.assertNotNull(newlyCreatedUser);
         Assert.assertTrue(newlyCreatedUser.getId() != 0);
         Assert.assertNotNull(newlyCreatedUser.getPlan());
-        Assert.assertNotNull(newlyCreatedUser.getPlan().getId());
         Set<UserRole> newlyCreatedUserUserRoles = newlyCreatedUser.getUserRoles();
         for (UserRole ur : newlyCreatedUserUserRoles) {
             Assert.assertNotNull(ur.getRole());
-            Assert.assertNotNull(ur.getRole().getId());
         }
 
     }
@@ -84,25 +60,6 @@ public class UserRepositoryIntegrationTest {
     public void deleteUser() throws Exception {
         User basicUser = createUser("userToDelete", "userToDelete@gmail.com");
         userRepository.delete(basicUser.getId());
-    }
-
-    private User createUser(String username, String email) {
-        Plan plan =  new Plan(PlanEnum.BASIC);
-        planRepository.save(plan);
-
-        User user = UserUtils.createBasicUser(username, email);
-        user.setPlan(plan);
-
-        Role adminRole = new Role(RoleEnum.BASIC);
-        roleRepository.save(adminRole);
-
-        Set<UserRole> userRoles = new HashSet<>();
-        UserRole userRole = new UserRole(user, adminRole);
-        userRoles.add(userRole);
-
-        user.getUserRoles().addAll(userRoles);
-        user = userRepository.save(user);
-        return user;
     }
 
 }
