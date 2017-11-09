@@ -28,6 +28,9 @@ public class PasswordResetTokenService {
     @Transactional
     public PasswordResetToken createPasswordResetTokenForEmail(String email) {
         User user = userRepository.findByEmail(email);
+        if (user == null) {
+            return null;
+        }
         String token = UUID.randomUUID().toString();
         LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
 
