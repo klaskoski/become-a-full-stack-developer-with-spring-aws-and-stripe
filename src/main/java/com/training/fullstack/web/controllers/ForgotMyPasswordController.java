@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 @Controller
 public class ForgotMyPasswordController {
@@ -27,6 +28,7 @@ public class ForgotMyPasswordController {
     private static final String EMAIL_ADDRESS_VIEW_NAME = "forgotmypassword/emailForm";
     private static final Logger LOG = LoggerFactory.getLogger(ForgotMyPasswordController.class);
     private static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "forgotmypassword.email.text";
+    public static final String CHANGE_PASSWORD_VIEW_NAME = "forgotmypassword/changePassword";
 
     @Autowired
     private I18NService i18NService;
@@ -70,5 +72,15 @@ public class ForgotMyPasswordController {
 
         model.addAttribute("mailSent", true);
         return EMAIL_ADDRESS_VIEW_NAME;
+    }
+
+
+    @GetMapping(CHANGE_PASSWORD_PATH)
+    public String changePasswordGet(@RequestParam("id") long id,
+                                    @RequestParam("token") String token,
+                                    Locale locale,
+                                    ModelMap model) {
+
+        return CHANGE_PASSWORD_VIEW_NAME;
     }
 }

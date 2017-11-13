@@ -14,6 +14,7 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.training.fullstack.web.controllers.ForgotMyPasswordController.CHANGE_PASSWORD_PATH;
 import static com.training.fullstack.web.controllers.ForgotMyPasswordController.FORGOT_MY_PASSWORD_URL;
 
 @Configuration
@@ -42,7 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/contact/**",
             "/error/**/*",
             "/h2-console/**",
-            FORGOT_MY_PASSWORD_URL
+            FORGOT_MY_PASSWORD_URL,
+            CHANGE_PASSWORD_PATH
     };
 
     @Override
