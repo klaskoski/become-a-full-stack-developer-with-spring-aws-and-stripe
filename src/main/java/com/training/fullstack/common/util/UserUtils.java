@@ -1,6 +1,9 @@
 package com.training.fullstack.common.util;
 
 import com.training.fullstack.backend.domain.backend.User;
+import com.training.fullstack.web.controllers.ForgotMyPasswordController;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class UserUtils {
 
@@ -22,5 +25,19 @@ public class UserUtils {
         user.setDescription("A basic user");
         user.setProfileImageUrl("url");
         return user;
+    }
+
+    public static String createPasswordResetUrl(HttpServletRequest request, long userId, String token) {
+        return request.getScheme() +
+                "://" +
+                request.getServerName() +
+                ":" +
+                request.getServerPort() +
+                request.getContextPath() +
+                ForgotMyPasswordController.CHANGE_PASSWORD_PATH +
+                "?id=" +
+                userId +
+                "&token=" +
+                token;
     }
 }

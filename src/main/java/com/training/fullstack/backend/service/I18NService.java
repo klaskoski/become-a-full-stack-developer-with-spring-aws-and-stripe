@@ -1,4 +1,4 @@
-package com.training.fullstack.web.i18n;
+package com.training.fullstack.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -18,7 +18,7 @@ public class I18NService {
         return getMessage(messageId, locale);
     }
 
-    private String getMessage(String messageId, Locale locale) {
+    public String getMessage(String messageId, Locale locale) {
         return messageSource.getMessage(messageId, null, locale);
     }
 }

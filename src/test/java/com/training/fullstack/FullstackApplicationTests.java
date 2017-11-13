@@ -1,6 +1,6 @@
 package com.training.fullstack;
 
-import com.training.fullstack.web.i18n.I18NService;
+import com.training.fullstack.backend.service.I18NService;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
