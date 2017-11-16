@@ -16,6 +16,7 @@ import java.util.List;
 
 import static com.training.fullstack.web.controllers.ForgotMyPasswordController.CHANGE_PASSWORD_PATH;
 import static com.training.fullstack.web.controllers.ForgotMyPasswordController.FORGOT_MY_PASSWORD_URL;
+import static com.training.fullstack.web.controllers.SignupController.SIGNUP_URL_MAPPING;
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/error/**/*",
             "/h2-console/**",
             FORGOT_MY_PASSWORD_URL,
-            CHANGE_PASSWORD_PATH
+            CHANGE_PASSWORD_PATH,
+            SIGNUP_URL_MAPPING
     };
 
     @Override
